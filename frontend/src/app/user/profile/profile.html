@@ -1,1 +1,77 @@
-<p>profile works!</p>
+<section class="page profile-page">
+  <p>
+    <a routerLink="/account">Retour au compte</a>
+  </p>
+
+  <p *ngIf="isLoading">Chargement du profil...</p>
+
+  <div class="profile-grid" *ngIf="!isLoading">
+    <form class="card profile-form" (ngSubmit)="updateProfile()">
+      <h1>Modifier mon profil</h1>
+
+      <label>
+        Prénom
+        <input type="text" name="firstName" [(ngModel)]="form.firstName">
+      </label>
+
+      <label>
+        Nom
+        <input type="text" name="lastName" [(ngModel)]="form.lastName">
+      </label>
+
+      <label>
+        Email
+        <input type="email" name="email" [(ngModel)]="form.email">
+      </label>
+
+      <label>
+        Nouveau mot de passe
+        <input type="password" name="password" [(ngModel)]="form.password">
+      </label>
+
+      <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+      <button class="btn" type="submit" [disabled]="isSaving">
+        {{ isSaving ? 'Enregistrement...' : 'Enregistrer' }}
+      </button>
+    </form>
+
+    <div class="card cv-form">
+      <h2>Mon CV</h2>
+
+      <p>
+        <strong>CV actuel :</strong> {{ getCvFileName() }}
+      </p>
+
+    <div class="cv-preview-card" *ngIf="getCvPreviewUrl()">
+    <div>
+        <strong>{{ getCvFileName() }}</strong>
+    <p>CV PDF envoyé</p>
+    </div>
+
+  <a class="btn btn-secondary" [href]="getCvPreviewUrl()" target="_blank">
+    Voir le CV
+  </a>
+</div>
+
+      <div class="file-upload">
+        <label class="file-button">
+          Choisir un fichier
+          <input type="file" accept="application/pdf" (change)="onFileSelected($event)">
+        </label>
+
+        <span class="file-name">
+          {{ selectedFile ? selectedFile.name : 'Aucun fichier choisi' }}
+        </span>
+      </div>
+
+      <p class="success" *ngIf="uploadMessage">{{ uploadMessage }}</p>
+      <p class="error" *ngIf="uploadError">{{ uploadError }}</p>
+
+      <button class="btn" type="button" (click)="uploadCv()" [disabled]="isUploading">
+        {{ isUploading ? 'Upload...' : 'Envoyer le CV' }}
+      </button>
+    </div>
+  </div>
+</section>

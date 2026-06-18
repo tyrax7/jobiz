@@ -53,9 +53,10 @@ async function uploadCv(req, res) {
       where: {
         id: req.user.userId
       },
-      data: {
-        cvPath
-      }
+    data: {
+        cvPath,
+        cvOriginalName: req.file.originalname
+    }
     });
 
     return res.status(200).json({

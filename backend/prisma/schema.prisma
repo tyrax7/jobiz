@@ -8,15 +8,16 @@ datasource db {
 }
 
 model User {
-  id           Int           @id @default(autoincrement())
-  firstName    String
-  lastName     String
-  email        String        @unique
-  password     String
-  cvPath       String?
-  role         Role          @default(USER)
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  id             Int      @id @default(autoincrement())
+  firstName      String
+  lastName       String
+  email          String   @unique
+  password       String
+  cvPath         String?
+  cvOriginalName String?
+  role           Role     @default(USER)
+  createdAt      DateTime @default(now())
+  updatedAt      DateTime @updatedAt
 
   applications Application[]
 

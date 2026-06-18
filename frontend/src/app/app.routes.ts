@@ -19,6 +19,8 @@ import { LegalNotice } from './legal/legal-notice/legal-notice';
 import { Privacy } from './legal/privacy/privacy';
 import { Cookies } from './legal/cookies/cookies';
 
+import { authGuard } from './auth/guards/auth.guard';
+
 export const routes: Routes = [
   { path: '', component: Home },
   { path: 'jobs', component: JobList },
@@ -33,5 +35,8 @@ export const routes: Routes = [
   { path: 'legal/mentions-legales', component: LegalNotice },
   { path: 'legal/privacy', component: Privacy },
   { path: 'legal/cookies', component: Cookies },
-  { path: '**', component: NotFound }
+  { path: '**', component: NotFound },
+  { path: 'account', component: Account, canActivate: [authGuard] },
+{ path: 'account/profile', component: Profile, canActivate: [authGuard] },
+{ path: 'account/applications', component: Applications, canActivate: [authGuard] },
 ];

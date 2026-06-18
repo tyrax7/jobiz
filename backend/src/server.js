@@ -3,7 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
-
+const path = require('path');
 const authRoutes = require('./routes/auth.routes');
 const userRoutes = require('./routes/user.routes');
 const jobRoutes = require('./routes/job.routes');
@@ -23,9 +23,11 @@ const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:4200';
 app.use(
   helmet({
     contentSecurityPolicy: false,
-    crossOriginEmbedderPolicy: false
+    crossOriginEmbedderPolicy: false,
+    crossOriginResourcePolicy: false,
+    frameguard: false
   })
-);
+)
 
 app.use(cors({
   origin: FRONTEND_URL,
@@ -39,7 +41,11 @@ app.get('/api/health', (req, res) => {
     service: 'jobiz-api'
   });
 });
-
+app.use('/uploads', (req, res, next) => {
+  res.setHeader('Cross-Origin-Resource-Policy', 'cross-origin');
+  res.removeHeader('X-Frame-Options');
+  next();
+}, express.static(path.join(__dirname, 'uploads')));
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
 app.use('/api/jobs', jobRoutes);

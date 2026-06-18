@@ -5,10 +5,10 @@ export interface User {
   email: string;
   role: 'USER' | 'ADMIN';
   cvPath?: string;
+  cvOriginalName?: string;
   createdAt?: string;
   updatedAt?: string;
 }
-
 export interface LoginRequest {
   email: string;
   password: string;

@@ -1,0 +1,102 @@
+.profile-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.profile-form,
+.cv-form {
+  display: grid;
+  gap: 1rem;
+
+  label {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  input {
+    padding: 0.7rem;
+    border: 1px solid #c9d6e2;
+    border-radius: 6px;
+    font: inherit;
+  }
+}
+
+.profile-form .btn,
+.cv-form .btn {
+  width: fit-content;
+  min-width: 150px;
+  height: auto;
+  padding: 0.7rem 1rem;
+}
+
+.cv-form button.btn {
+  align-self: flex-start;
+}
+
+.cv-preview-card {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid #c9d6e2;
+  border-radius: 6px;
+  background: #f8fafc;
+
+  p {
+    margin: 0.3rem 0 0;
+    color: #475569;
+  }
+}
+
+.cv-preview-card .btn {
+  width: fit-content;
+  min-width: auto;
+  white-space: nowrap;
+}
+
+.file-upload {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.file-button {
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  padding: 0.7rem 1rem;
+  border-radius: 6px;
+  background: #1f6feb;
+  color: #ffffff;
+  cursor: pointer;
+  font-weight: 600;
+
+  input {
+    display: none;
+  }
+}
+
+.file-button:hover {
+  background: #195ec4;
+}
+
+.file-name {
+  color: #475569;
+}
+
+.success {
+  color: #067647;
+}
+
+.error {
+  color: #b42318;
+}
+
+@media (max-width: 800px) {
+  .profile-grid {
+    grid-template-columns: 1fr;
+  }
+}

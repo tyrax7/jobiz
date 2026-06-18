@@ -1,12 +1,24 @@
-<section class="page card">
-  <h1>Mon compte</h1>
-  <p>Bienvenue dans votre espace utilisateur.</p>
+<section class="page">
+  <div class="card">
+    <h1>Mon compte</h1>
 
-  <p>
-    <a routerLink="/account/profile">Modifier mon profil</a>
-  </p>
+    <p *ngIf="isLoading">Chargement du compte...</p>
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
 
-  <p>
-    <a routerLink="/account/applications">Voir mes candidatures</a>
-  </p>
+    <div *ngIf="user">
+      <p><strong>Prénom :</strong> {{ user.firstName }}</p>
+      <p><strong>Nom :</strong> {{ user.lastName }}</p>
+      <p><strong>Email :</strong> {{ user.email }}</p>
+      <p><strong>Rôle :</strong> {{ user.role }}</p>
+     <p><strong>CV actuel :</strong> {{ getCvFileName() || 'Aucun CV envoyé' }}</p>
+
+      <p>
+        <a routerLink="/account/profile" class="btn">Modifier mon profil</a>
+      </p>
+
+      <p>
+        <a routerLink="/account/applications">Voir mes candidatures</a>
+      </p>
+    </div>
+  </div>
 </section>
