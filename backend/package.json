@@ -12,15 +12,20 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@adminjs/express": "^6.1.1",
+    "@adminjs/sql": "^2.2.6",
     "@prisma/client": "6.19.3",
+    "adminjs": "^7.8.17",
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "express-rate-limit": "^8.5.2",
+    "express-session": "^1.19.0",
     "helmet": "^8.2.0",
     "jsonwebtoken": "^9.0.3",
-    "multer": "^2.2.0"
+    "multer": "^2.2.0",
+    "mysql2": "^3.22.5"
   },
   "devDependencies": {
     "nodemon": "^3.1.14",

@@ -5,20 +5,28 @@ const cors = require('cors');
 const helmet = require('helmet');
 
 const authRoutes = require('./routes/auth.routes');
+const userRoutes = require('./routes/user.routes');
 const jobRoutes = require('./routes/job.routes');
 const categoryRoutes = require('./routes/category.routes');
 const jobTypeRoutes = require('./routes/job-type.routes');
 const companyRoutes = require('./routes/company.routes');
 const cityRoutes = require('./routes/city.routes');
-const userRoutes = require('./routes/user.routes');
 const applicationRoutes = require('./routes/application.routes');
 const contactRoutes = require('./routes/contact.routes');
+const setupAdmin = require('./admin/admin');
+
 const app = express();
 
 const PORT = process.env.PORT || 3000;
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:4200';
 
-app.use(helmet());
+app.use(
+  helmet({
+    contentSecurityPolicy: false,
+    crossOriginEmbedderPolicy: false
+  })
+);
+
 app.use(cors({
   origin: FRONTEND_URL,
   credentials: true
@@ -54,7 +62,13 @@ app.use((error, req, res, next) => {
   return res.status(500).json({ message: 'Erreur serveur.' });
 });
 
+async function startServer() {
+  await setupAdmin(app);
 
-app.listen(PORT, () => {
-  console.log(`API Jobiz lancee sur http://localhost:${PORT}`);
-});
+  app.listen(PORT, () => {
+    console.log(`API Jobiz lancee sur http://localhost:${PORT}`);
+    console.log(`AdminJS disponible sur http://localhost:${PORT}/admin`);
+  });
+}
+
+startServer();
