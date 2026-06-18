@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-job-list',
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './job-list.html',
-  styleUrl: './job-list.scss',
+  styleUrl: './job-list.scss'
 })
 export class JobList {}

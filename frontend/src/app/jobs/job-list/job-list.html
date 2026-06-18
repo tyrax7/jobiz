@@ -1,1 +1,29 @@
-<p>job-list works!</p>
+<section class="page">
+  <h1>Offres d’emploi</h1>
+
+  <div class="filters card">
+    <input type="text" placeholder="Rechercher une offre">
+    <select>
+      <option>Catégorie</option>
+      <option>Développement Web</option>
+      <option>Cybersécurité</option>
+    </select>
+    <button class="btn">Filtrer</button>
+  </div>
+
+  <div class="job-list">
+    <article class="card">
+      <h2>Développeur Web Junior</h2>
+      <p>TechNova - Montpellier - CDI</p>
+      <p>Angular, Node.js, travail hybride possible.</p>
+      <a routerLink="/jobs/1" class="btn btn-secondary">Détail</a>
+    </article>
+
+    <article class="card">
+      <h2>Technicien Systèmes et Réseaux</h2>
+      <p>CloudLink - Lyon - CDD</p>
+      <p>Support utilisateurs, serveurs et réseau.</p>
+      <a routerLink="/jobs/2" class="btn btn-secondary">Détail</a>
+    </article>
+  </div>
+</section>

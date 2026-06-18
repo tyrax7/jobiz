@@ -1,0 +1,27 @@
+.hero {
+  display: grid;
+  align-items: center;
+  min-height: 280px;
+  margin-bottom: 2rem;
+  padding: 2rem;
+  border-radius: 8px;
+  background: #ffffff;
+  border: 1px solid #d8e2ee;
+
+  p {
+    max-width: 650px;
+    line-height: 1.6;
+  }
+}
+
+.jobs-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+@media (max-width: 800px) {
+  .jobs-grid {
+    grid-template-columns: 1fr;
+  }
+}
