@@ -71,6 +71,8 @@ model Job {
   applications Application[]
   categories   JobCategoryOnJob[]
   types        JobTypeOnJob[]
+  view         JobView?
+  dailyViews   JobDailyView[]
 
   @@map("jobs")
 }
@@ -147,6 +149,28 @@ model JobTypeOnJob {
 
   @@id([jobId, typeId])
   @@map("job_type_on_job")
+}
+model JobView {
+  id        Int      @id @default(autoincrement())
+  total     Int      @default(0)
+  updatedAt DateTime @updatedAt
+
+  jobId Int @unique
+  job   Job @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  @@map("job_views")
+}
+
+model JobDailyView {
+  id    Int      @id @default(autoincrement())
+  day   DateTime
+  views Int      @default(0)
+
+  jobId Int
+  job   Job @relation(fields: [jobId], references: [id], onDelete: Cascade)
+
+  @@unique([jobId, day])
+  @@map("job_daily_views")
 }
 
 enum Role {
