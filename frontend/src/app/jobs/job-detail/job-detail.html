@@ -38,6 +38,30 @@
       </li>
     </ul>
 
-    <a routerLink="/login" class="btn">Se connecter pour postuler</a>
+    <div class="application-box" *ngIf="!isLoggedIn">
+      <p>Connectez-vous pour postuler à cette offre.</p>
+      <a routerLink="/login" class="btn">Se connecter</a>
+    </div>
+
+    <form class="application-box" *ngIf="isLoggedIn" (ngSubmit)="apply()">
+      <h2>Postuler à cette offre</h2>
+
+      <label>
+        Lettre de motivation
+        <textarea
+          rows="6"
+          name="coverLetter"
+          [(ngModel)]="coverLetter"
+          placeholder="Expliquez brièvement votre motivation"
+        ></textarea>
+      </label>
+
+      <p class="success" *ngIf="applicationSuccess">{{ applicationSuccess }}</p>
+      <p class="error" *ngIf="applicationError">{{ applicationError }}</p>
+
+      <button class="btn" type="submit" [disabled]="isApplying">
+        {{ isApplying ? 'Envoi...' : 'Postuler' }}
+      </button>
+    </form>
   </article>
 </section>

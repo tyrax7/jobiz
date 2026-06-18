@@ -10,3 +10,31 @@
     line-height: 1.6;
   }
 }
+.application-box {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1rem;
+  border-top: 1px solid #d8e2ee;
+
+  label {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  textarea {
+    padding: 0.7rem;
+    border: 1px solid #c9d6e2;
+    border-radius: 6px;
+    font: inherit;
+    resize: vertical;
+  }
+}
+
+.success {
+  color: #067647;
+}
+
+.error {
+  color: #b42318;
+}

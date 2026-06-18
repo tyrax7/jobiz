@@ -1,1 +1,37 @@
-<p>applications works!</p>
+<section class="page">
+  <p>
+    <a routerLink="/account">Retour au compte</a>
+  </p>
+
+  <h1>Mes candidatures</h1>
+
+  <p *ngIf="isLoading">Chargement des candidatures...</p>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+  <p *ngIf="!isLoading && !errorMessage && applications.length === 0">
+    Vous n’avez pas encore postulé à une offre.
+  </p>
+
+  <div class="application-list" *ngIf="applications.length > 0">
+    <article class="card" *ngFor="let application of applications">
+      <h2>{{ application.job.title }}</h2>
+
+      <p>
+        {{ application.job.company?.name }} -
+        {{ application.job.city?.name || 'Ville non précisée' }}
+      </p>
+
+      <p>
+        <strong>Statut :</strong> {{ application.status }}
+      </p>
+
+      <p>
+        <strong>Date :</strong> {{ application.createdAt | date:'dd/MM/yyyy' }}
+      </p>
+
+      <a [routerLink]="['/jobs', application.job.id]" class="btn btn-secondary">
+        Voir l’offre
+      </a>
+    </article>
+  </div>
+</section>
