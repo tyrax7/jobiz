@@ -4,6 +4,8 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 
+const authRoutes = require('./routes/auth.routes');
+
 const app = express();
 
 const PORT = process.env.PORT || 3000;
@@ -22,6 +24,8 @@ app.get('/api/health', (req, res) => {
     service: 'jobiz-api'
   });
 });
+
+app.use('/api/auth', authRoutes);
 
 app.listen(PORT, () => {
   console.log(`API Jobiz lancee sur http://localhost:${PORT}`);
