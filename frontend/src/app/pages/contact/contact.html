@@ -1,37 +1,74 @@
 <section class="page">
   <h1>Contact</h1>
 
-  <form class="card contact-form">
+  <form class="card contact-form" (ngSubmit)="onSubmit()">
     <label>
       Prénom
-      <input type="text">
+      <input
+        type="text"
+        name="firstName"
+        [(ngModel)]="form.firstName"
+        required
+      >
     </label>
 
     <label>
       Nom
-      <input type="text">
+      <input
+        type="text"
+        name="lastName"
+        [(ngModel)]="form.lastName"
+        required
+      >
     </label>
 
     <label>
       Email
-      <input type="email">
+      <input
+        type="email"
+        name="email"
+        [(ngModel)]="form.email"
+        required
+      >
     </label>
 
     <label>
       Sujet
-      <input type="text">
+      <input
+        type="text"
+        name="subject"
+        [(ngModel)]="form.subject"
+        required
+      >
     </label>
 
     <label>
       Message
-      <textarea rows="5"></textarea>
+      <textarea
+        rows="6"
+        name="message"
+        [(ngModel)]="form.message"
+        required
+      ></textarea>
     </label>
 
     <label class="checkbox">
-      <input type="checkbox">
-      J’accepte que mes données soient utilisées pour traiter ma demande.
+      <input
+        type="checkbox"
+        name="dataConsent"
+        [(ngModel)]="form.dataConsent"
+        required
+      >
+      <span>
+        J’accepte que mes données soient utilisées pour traiter ma demande.
+      </span>
     </label>
 
-    <button type="button" class="btn">Envoyer</button>
+    <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <button class="btn" type="submit" [disabled]="!isFormValid() || isSending">
+      {{ isSending ? 'Envoi...' : 'Envoyer' }}
+    </button>
   </form>
 </section>

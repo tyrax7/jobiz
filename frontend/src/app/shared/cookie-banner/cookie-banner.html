@@ -1,0 +1,20 @@
+<div class="cookie-banner" *ngIf="isVisible">
+  <div>
+    <strong>Cookies</strong>
+    <p>
+      Jobiz utilise uniquement des cookies ou stockages nécessaires au fonctionnement du site.
+      Vous pouvez accepter ou continuer sans accepter.
+      <a routerLink="/legal/cookies">En savoir plus</a>
+    </p>
+  </div>
+
+  <div class="actions">
+    <button type="button" class="btn btn-secondary" (click)="refuseCookies()">
+      Continuer sans accepter
+    </button>
+
+    <button type="button" class="btn" (click)="acceptCookies()">
+      Accepter
+    </button>
+  </div>
+</div>
