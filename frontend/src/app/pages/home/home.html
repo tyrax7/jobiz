@@ -1,41 +1,69 @@
-<section class="page">
-  <div class="hero">
-    <div>
-      <h1>Trouvez votre prochain emploi informatique</h1>
-      <p>
-        Jobiz aide les candidats à découvrir des offres dans le développement,
-        le réseau, le système et la cybersécurité.
-      </p>
-      <a routerLink="/jobs" class="btn">Voir les offres</a>
-    </div>
-  </div>
+<section class="page home-page">
+    <section class="home-hero">
+  <h1>Trouvez votre prochain emploi dans l’informatique</h1>
+  <p>
+    Des milliers d’offres d’emploi, des entreprises innovantes,
+    des opportunités qui vous correspondent.
+  </p>
 
-<section class="page">
-  <div class="hero">
-    <div>
-      <h1>Trouvez votre prochain emploi informatique</h1>
-      <p>
-        Jobiz aide les candidats à découvrir des offres dans le développement,
-        le réseau, le système et la cybersécurité.
-      </p>
-      <a routerLink="/jobs" class="btn">Voir les offres</a>
+  <a routerLink="/jobs" class="btn">Rechercher une offre</a>
+  </section>
+  <section class="featured-section">
+    <div class="section-header">
+      <h1>Offres en vedette</h1>
+      <a routerLink="/jobs" class="btn btn-secondary">Voir toutes les offres</a>
     </div>
-  </div>
-
-  <section class="section">
-    <h2>Dernières offres</h2>
 
     <p *ngIf="isLoading">Chargement des offres...</p>
-    <p *ngIf="errorMessage">{{ errorMessage }}</p>
-    <p *ngIf="!isLoading && !errorMessage && jobs.length === 0">Aucune offre disponible.</p>
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+    <p *ngIf="!isLoading && !errorMessage && jobs.length === 0">
+      Aucune offre disponible pour le moment.
+    </p>
 
-    <div class="jobs-grid" *ngIf="!isLoading && jobs.length > 0">
-      <article class="card" *ngFor="let job of jobs">
-        <h3>{{ job.title }}</h3>
-        <p>{{ job.company?.name }} - {{ job.city?.name }}</p>
-        <a [routerLink]="['/jobs', job.id]">Voir le détail</a>
+    <div class="featured-grid" *ngIf="!isLoading && jobs.length > 0">
+      <article class="job-card" *ngFor="let job of jobs">
+        <div class="job-image">
+          <span>Offre</span>
+        </div>
+
+        <div class="job-content">
+          <h2>{{ job.title }}</h2>
+          <p>{{ job.company?.name }} - {{ job.city?.name }}</p>
+          <a [routerLink]="['/jobs', job.id]" class="btn">Détail</a>
+        </div>
       </article>
     </div>
   </section>
-</section>
+
+  <section class="section">
+    <h2>Catégories</h2>
+
+    <div class="category-grid">
+      <a routerLink="/jobs" class="category-card">Développement Web</a>
+      <a routerLink="/jobs" class="category-card">Administration Système</a>
+      <a routerLink="/jobs" class="category-card">Réseau</a>
+      <a routerLink="/jobs" class="category-card">Cybersécurité</a>
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>Entreprises récentes</h2>
+
+    <div class="company-grid">
+      <div class="company-card">
+        <h3>TechNova</h3>
+        <p>Développement web</p>
+      </div>
+
+      <div class="company-card">
+        <h3>CyberSafe</h3>
+        <p>Sécurité informatique</p>
+      </div>
+
+      <div class="company-card">
+        <h3>CloudLink</h3>
+        <p>Cloud et réseau</p>
+      </div>
+    </div>
+  </section>
 </section>

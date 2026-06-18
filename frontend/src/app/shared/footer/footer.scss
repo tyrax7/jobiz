@@ -2,9 +2,14 @@
   display: flex;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1rem 2rem;
-  border-top: 1px solid #d8e2ee;
+  padding: 1.5rem 2rem;
+  border-top: 1px solid var(--border);
   background: #ffffff;
+
+  span {
+    font-weight: 800;
+    color: var(--primary);
+  }
 
   nav {
     display: flex;
@@ -13,12 +18,12 @@
   }
 
   a {
-    color: #1f2933;
+    color: var(--text);
     text-decoration: none;
   }
 
   a:hover {
-    color: #1f6feb;
+    color: var(--primary);
   }
 }
 

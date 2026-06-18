@@ -17,7 +17,12 @@
 
       <p>
         <a routerLink="/account/applications">Voir mes candidatures</a>
-      </p>
+      </p> 
+      <p *ngIf="isAdmin()">
+        <a href="http://localhost:3000/admin" target="_blank" class="btn">
+            Accéder au panel admin
+        </a>
+    </p>
     </div>
   </div>
 </section>

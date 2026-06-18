@@ -39,4 +39,8 @@ export class Account implements OnInit {
   getCvFileName(): string {
     return this.user?.cvOriginalName || 'Aucun CV envoyé';
   }
+
+  isAdmin(): boolean {
+  return this.user?.role === 'ADMIN';
+  }
 }
