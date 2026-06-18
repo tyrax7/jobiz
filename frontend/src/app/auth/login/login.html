@@ -1,1 +1,26 @@
-<p>login works!</p>
+<section class="page auth-page">
+  <form class="card auth-form" (ngSubmit)="onSubmit()">
+    <h1>Connexion</h1>
+
+    <label>
+      Email
+      <input type="email" name="email" [(ngModel)]="form.email" required>
+    </label>
+
+    <label>
+      Mot de passe
+      <input type="password" name="password" [(ngModel)]="form.password" required>
+    </label>
+
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <button class="btn" type="submit" [disabled]="isLoading">
+      {{ isLoading ? 'Connexion...' : 'Se connecter' }}
+    </button>
+
+    <p>
+      Pas encore de compte ?
+      <a routerLink="/register">Créer un compte</a>
+    </p>
+  </form>
+</section>

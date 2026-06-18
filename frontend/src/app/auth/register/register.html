@@ -1,1 +1,37 @@
-<p>register works!</p>
+<section class="page auth-page">
+  <form class="card auth-form" (ngSubmit)="onSubmit()">
+    <h1>Inscription</h1>
+
+    <label>
+      Prénom
+      <input type="text" name="firstName" [(ngModel)]="form.firstName" required>
+    </label>
+
+    <label>
+      Nom
+      <input type="text" name="lastName" [(ngModel)]="form.lastName" required>
+    </label>
+
+    <label>
+      Email
+      <input type="email" name="email" [(ngModel)]="form.email" required>
+    </label>
+
+    <label>
+      Mot de passe
+      <input type="password" name="password" [(ngModel)]="form.password" required>
+    </label>
+
+    <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+    <button class="btn" type="submit" [disabled]="isLoading">
+      {{ isLoading ? 'Création...' : 'Créer mon compte' }}
+    </button>
+
+    <p>
+      Déjà un compte ?
+      <a routerLink="/login">Se connecter</a>
+    </p>
+  </form>
+</section>

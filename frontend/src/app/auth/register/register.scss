@@ -1,0 +1,30 @@
+.auth-page {
+  display: grid;
+  place-items: center;
+}
+
+.auth-form {
+  display: grid;
+  gap: 1rem;
+  width: min(100%, 420px);
+
+  label {
+    display: grid;
+    gap: 0.4rem;
+  }
+
+  input {
+    padding: 0.7rem;
+    border: 1px solid #c9d6e2;
+    border-radius: 6px;
+    font: inherit;
+  }
+}
+
+.error {
+  color: #b42318;
+}
+
+.success {
+  color: #067647;
+}

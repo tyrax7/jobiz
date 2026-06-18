@@ -6,7 +6,15 @@
     <a routerLink="/jobs">Offres</a>
     <a routerLink="/about">À propos</a>
     <a routerLink="/contact">Contact</a>
-    <a routerLink="/login">Connexion</a>
-    <a routerLink="/register" class="register-link">Inscription</a>
+
+    <ng-container *ngIf="!currentUser">
+      <a routerLink="/login">Connexion</a>
+      <a routerLink="/register" class="register-link">Inscription</a>
+    </ng-container>
+
+    <ng-container *ngIf="currentUser">
+      <a routerLink="/account">Mon compte</a>
+      <button type="button" class="logout-button" (click)="logout()">Déconnexion</button>
+    </ng-container>
   </nav>
 </header>
