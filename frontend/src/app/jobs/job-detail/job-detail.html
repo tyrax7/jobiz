@@ -1,16 +1,41 @@
 <section class="page">
-  <article class="card job-detail">
-    <p class="meta">TechNova - Montpellier - CDI</p>
-    <h1>Développeur Web Junior</h1>
+  <p *ngIf="isLoading">Chargement de l’offre...</p>
+  <p *ngIf="errorMessage">{{ errorMessage }}</p>
 
-    <p>
-      Participation au développement d’une application web avec Angular et Node.js.
+  <article class="card job-detail" *ngIf="job">
+    <p class="meta">
+      {{ job.company?.name }} -
+      {{ job.city?.name || 'Ville non précisée' }}
     </p>
 
+    <h1>{{ job.title }}</h1>
+
+    <p>{{ job.description }}</p>
+
     <ul>
-      <li>Catégorie : Développement Web</li>
-      <li>Télétravail : oui</li>
-      <li>Salaire : 28 000 à 34 000 euros</li>
+      <li>
+        Catégories :
+        <span *ngFor="let relation of job.categories">
+          {{ relation.category.name }}
+        </span>
+      </li>
+
+      <li>
+        Types de contrat :
+        <span *ngFor="let relation of job.types">
+          {{ relation.type.name }}
+        </span>
+      </li>
+
+      <li>
+        Télétravail :
+        {{ job.remoteAllowed ? 'oui' : 'non' }}
+      </li>
+
+      <li *ngIf="job.salaryMin || job.salaryMax">
+        Salaire :
+        {{ job.salaryMin || 0 }} à {{ job.salaryMax || 0 }} euros
+      </li>
     </ul>
 
     <a routerLink="/login" class="btn">Se connecter pour postuler</a>

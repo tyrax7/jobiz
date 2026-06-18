@@ -2,28 +2,58 @@
   <h1>Offres d’emploi</h1>
 
   <div class="filters card">
-    <input type="text" placeholder="Rechercher une offre">
-    <select>
-      <option>Catégorie</option>
-      <option>Développement Web</option>
-      <option>Cybersécurité</option>
+    <input
+      type="text"
+      placeholder="Rechercher une offre"
+      [(ngModel)]="filters.search"
+    >
+
+    <select [(ngModel)]="filters.categoryId">
+      <option value="">Toutes les catégories</option>
+      <option *ngFor="let category of categories" [value]="category.id">
+        {{ category.name }}
+      </option>
     </select>
-    <button class="btn">Filtrer</button>
+
+    <select [(ngModel)]="filters.typeId">
+      <option value="">Tous les contrats</option>
+      <option *ngFor="let type of jobTypes" [value]="type.id">
+        {{ type.name }}
+      </option>
+    </select>
+
+    <select [(ngModel)]="filters.cityId">
+      <option value="">Toutes les villes</option>
+      <option *ngFor="let city of cities" [value]="city.id">
+        {{ city.name }}
+      </option>
+    </select>
+
+    <button class="btn" type="button" (click)="loadJobs()">Filtrer</button>
+    <button class="btn btn-secondary" type="button" (click)="resetFilters()">Réinitialiser</button>
   </div>
 
-  <div class="job-list">
-    <article class="card">
-      <h2>Développeur Web Junior</h2>
-      <p>TechNova - Montpellier - CDI</p>
-      <p>Angular, Node.js, travail hybride possible.</p>
-      <a routerLink="/jobs/1" class="btn btn-secondary">Détail</a>
-    </article>
+  <p *ngIf="isLoading">Chargement des offres...</p>
+  <p *ngIf="errorMessage">{{ errorMessage }}</p>
+  <p *ngIf="!isLoading && !errorMessage && jobs.length === 0">Aucune offre trouvée.</p>
 
-    <article class="card">
-      <h2>Technicien Systèmes et Réseaux</h2>
-      <p>CloudLink - Lyon - CDD</p>
-      <p>Support utilisateurs, serveurs et réseau.</p>
-      <a routerLink="/jobs/2" class="btn btn-secondary">Détail</a>
+  <div class="job-list" *ngIf="!isLoading && jobs.length > 0">
+    <article class="card" *ngFor="let job of jobs">
+      <h2>{{ job.title }}</h2>
+      <p>
+        {{ job.company?.name }} -
+        {{ job.city?.name || 'Ville non précisée' }}
+      </p>
+
+      <p>
+        <span *ngFor="let relation of job.types">
+          {{ relation.type.name }}
+        </span>
+      </p>
+
+      <p>{{ job.description }}</p>
+
+      <a [routerLink]="['/jobs', job.id]" class="btn btn-secondary">Détail</a>
     </article>
   </div>
 </section>

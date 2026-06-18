@@ -10,27 +10,32 @@
     </div>
   </div>
 
+<section class="page">
+  <div class="hero">
+    <div>
+      <h1>Trouvez votre prochain emploi informatique</h1>
+      <p>
+        Jobiz aide les candidats à découvrir des offres dans le développement,
+        le réseau, le système et la cybersécurité.
+      </p>
+      <a routerLink="/jobs" class="btn">Voir les offres</a>
+    </div>
+  </div>
+
   <section class="section">
     <h2>Dernières offres</h2>
 
-    <div class="jobs-grid">
-      <article class="card">
-        <h3>Développeur Web Junior</h3>
-        <p>TechNova - Montpellier</p>
-        <a routerLink="/jobs/1">Voir le détail</a>
-      </article>
+    <p *ngIf="isLoading">Chargement des offres...</p>
+    <p *ngIf="errorMessage">{{ errorMessage }}</p>
+    <p *ngIf="!isLoading && !errorMessage && jobs.length === 0">Aucune offre disponible.</p>
 
-      <article class="card">
-        <h3>Technicien Systèmes et Réseaux</h3>
-        <p>CloudLink - Lyon</p>
-        <a routerLink="/jobs/2">Voir le détail</a>
-      </article>
-
-      <article class="card">
-        <h3>Assistant Cybersécurité</h3>
-        <p>CyberSafe - Paris</p>
-        <a routerLink="/jobs/3">Voir le détail</a>
+    <div class="jobs-grid" *ngIf="!isLoading && jobs.length > 0">
+      <article class="card" *ngFor="let job of jobs">
+        <h3>{{ job.title }}</h3>
+        <p>{{ job.company?.name }} - {{ job.city?.name }}</p>
+        <a [routerLink]="['/jobs', job.id]">Voir le détail</a>
       </article>
     </div>
   </section>
+</section>
 </section>
