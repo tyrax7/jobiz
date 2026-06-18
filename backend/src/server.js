@@ -5,6 +5,11 @@ const cors = require('cors');
 const helmet = require('helmet');
 
 const authRoutes = require('./routes/auth.routes');
+const jobRoutes = require('./routes/job.routes');
+const categoryRoutes = require('./routes/category.routes');
+const jobTypeRoutes = require('./routes/job-type.routes');
+const companyRoutes = require('./routes/company.routes');
+const cityRoutes = require('./routes/city.routes');
 
 const app = express();
 
@@ -26,6 +31,11 @@ app.get('/api/health', (req, res) => {
 });
 
 app.use('/api/auth', authRoutes);
+app.use('/api/jobs', jobRoutes);
+app.use('/api/categories', categoryRoutes);
+app.use('/api/job-types', jobTypeRoutes);
+app.use('/api/companies', companyRoutes);
+app.use('/api/cities', cityRoutes);
 
 app.listen(PORT, () => {
   console.log(`API Jobiz lancee sur http://localhost:${PORT}`);
