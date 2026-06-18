@@ -11,6 +11,7 @@ const jobTypeRoutes = require('./routes/job-type.routes');
 const companyRoutes = require('./routes/company.routes');
 const cityRoutes = require('./routes/city.routes');
 const userRoutes = require('./routes/user.routes');
+const applicationRoutes = require('./routes/application.routes');
 
 const app = express();
 
@@ -38,7 +39,7 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/job-types', jobTypeRoutes);
 app.use('/api/companies', companyRoutes);
 app.use('/api/cities', cityRoutes);
-
+app.use('/api/applications', applicationRoutes);
 
 app.use((error, req, res, next) => {
   if (error.code === 'LIMIT_FILE_SIZE') {
