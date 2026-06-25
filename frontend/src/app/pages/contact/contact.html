@@ -1,74 +1,83 @@
-<section class="page">
-  <h1>Contact</h1>
+<section class="contact-page">
+  <section class="contact-hero">
+    <div class="contact-intro">
+      <p class="eyebrow">Contact</p>
+      <h1>Une question sur Jobiz ?</h1>
+      <p>
+        Utilisez ce formulaire pour envoyer une demande à l’équipe Jobiz.
+        Votre message sera enregistré afin qu’un administrateur puisse le traiter.
+      </p>
 
-  <form class="card contact-form" (ngSubmit)="onSubmit()">
-    <label>
-      Prénom
-      <input
-        type="text"
-        name="firstName"
-        [(ngModel)]="form.firstName"
-        required
-      >
-    </label>
+      <div class="info-list">
+        <div class="info-item">
+          <span>01</span>
+          <div>
+            <h2>Plateforme emploi</h2>
+            <p>Un service pensé pour faciliter la recherche d’emploi dans l’informatique.</p>
+          </div>
+        </div>
 
-    <label>
-      Nom
-      <input
-        type="text"
-        name="lastName"
-        [(ngModel)]="form.lastName"
-        required
-      >
-    </label>
+        <div class="info-item">
+          <span>02</span>
+          <div>
+            <h2>Données protégées</h2>
+            <p>Le consentement est obligatoire avant l’envoi du message.</p>
+          </div>
+        </div>
 
-    <label>
-      Email
-      <input
-        type="email"
-        name="email"
-        [(ngModel)]="form.email"
-        required
-      >
-    </label>
+        <div class="info-item">
+          <span>03</span>
+          <div>
+            <h2>Suivi des demandes</h2>
+            <p>Votre message est transmis à notre équipe pour être traité rapidement.</p>
+          </div>
+        </div>
+      </div>
+    </div>
 
-    <label>
-      Sujet
-      <input
-        type="text"
-        name="subject"
-        [(ngModel)]="form.subject"
-        required
-      >
-    </label>
+    <form class="contact-form" (ngSubmit)="onSubmit()">
+      <h2>Envoyer un message</h2>
 
-    <label>
-      Message
-      <textarea
-        rows="6"
-        name="message"
-        [(ngModel)]="form.message"
-        required
-      ></textarea>
-    </label>
+      <div class="form-row">
+        <label>
+          Prénom
+          <input type="text" name="firstName" [(ngModel)]="form.firstName" required>
+        </label>
 
-    <label class="checkbox">
-      <input
-        type="checkbox"
-        name="dataConsent"
-        [(ngModel)]="form.dataConsent"
-        required
-      >
-      <span>
-        J’accepte que mes données soient utilisées pour traiter ma demande.
-      </span>
-    </label>
+        <label>
+          Nom
+          <input type="text" name="lastName" [(ngModel)]="form.lastName" required>
+        </label>
+      </div>
 
-    <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
-    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+      <label>
+        Email
+        <input type="email" name="email" [(ngModel)]="form.email" required>
+      </label>
 
-    <button class="btn" type="submit" [disabled]="!isFormValid() || isSending">
-      {{ isSending ? 'Envoi...' : 'Envoyer' }}
-    </button>
-  </form>
+      <label>
+        Sujet
+        <input type="text" name="subject" [(ngModel)]="form.subject" required>
+      </label>
+
+      <label>
+        Message
+        <textarea name="message" rows="6" [(ngModel)]="form.message" required></textarea>
+      </label>
+
+      <label class="checkbox">
+        <input type="checkbox" name="dataConsent" [(ngModel)]="form.dataConsent" required>
+        <span>
+          J’accepte que mes données soient utilisées pour traiter ma demande.
+        </span>
+      </label>
+
+      <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+      <button class="btn" type="submit">
+          Envoyer le message
+      </button>
+      
+    </form>
+  </section>
 </section>

@@ -1,10 +1,10 @@
 import { Component } from '@angular/core';
 import { Layout } from './core/layout/layout';
+import { Dialog } from './shared/dialog/dialog';
 
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [Layout],
+  imports: [Layout, Dialog],
   templateUrl: './app.html',
   styleUrl: './app.scss'
 })

@@ -1,28 +1,70 @@
-<section class="page">
-  <div class="card">
-    <h1>Mon compte</h1>
+<section class="account-page">
+  <p *ngIf="isLoading">Chargement du compte...</p>
+  <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
 
-    <p *ngIf="isLoading">Chargement du compte...</p>
-    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+  <div class="account-dashboard" *ngIf="user">
+    <section class="account-hero">
+      <div class="avatar">
+        {{ user.firstName.charAt(0) }}{{ user.lastName.charAt(0) }}
+      </div>
 
-    <div *ngIf="user">
-      <p><strong>Prénom :</strong> {{ user.firstName }}</p>
-      <p><strong>Nom :</strong> {{ user.lastName }}</p>
-      <p><strong>Email :</strong> {{ user.email }}</p>
-     <p><strong>CV actuel :</strong> {{ getCvFileName() || 'Aucun CV envoyé' }}</p>
+      <div>
+        <p class="eyebrow">Espace candidat</p>
+        <h1>Bonjour {{ user.firstName }}</h1>
+        <p>
+          Gérez votre profil, votre CV et vos candidatures depuis votre espace personnel.
+        </p>
+      </div>
+    </section>
 
-      <p>
+    <section class="account-grid">
+      <article class="account-card">
+        <h2>Mes informations</h2>
+
+        <div class="info-list">
+          <p><span>Prénom</span><strong>{{ user.firstName }}</strong></p>
+          <p><span>Nom</span><strong>{{ user.lastName }}</strong></p>
+          <p><span>Email</span><strong>{{ user.email }}</strong></p>
+        </div>
+
         <a routerLink="/account/profile" class="btn">Modifier mon profil</a>
-      </p>
+      </article>
 
-      <p>
-        <a routerLink="/account/applications">Voir mes candidatures</a>
-      </p> 
-      <p *ngIf="isAdmin()">
-        <a href="http://localhost:3000/admin" target="_blank" class="btn">
-            Accéder au panel admin
+      <article class="account-card">
+        <h2>Mon CV</h2>
+
+        <div class="cv-status">
+          <span>PDF</span>
+          <div>
+            <strong>{{ getCvFileName() || 'Aucun CV envoyé' }}</strong>
+            <p>{{ getCvFileName() ? 'CV disponible pour postuler' : 'Ajoutez un CV pour postuler aux offres' }}</p>
+          </div>
+        </div>
+
+        <a routerLink="/account/profile" class="btn btn-secondary">Gérer mon CV</a>
+      </article>
+
+      <article class="account-card">
+        <h2>Mes candidatures</h2>
+        <p class="muted">
+          Retrouvez les offres auxquelles vous avez postulé et suivez leur statut.
+        </p>
+
+        <a routerLink="/account/applications" class="btn btn-secondary">
+          Voir mes candidatures
         </a>
-    </p>
-    </div>
+      </article>
+
+      <article class="account-card admin-card" *ngIf="isAdmin()">
+        <h2>Administration</h2>
+        <p class="muted">
+          Accédez au panel d’administration pour gérer les données de Jobiz.
+        </p>
+
+        <a href="http://localhost:3000/admin" target="_blank" class="btn">
+          Ouvrir AdminJS
+        </a>
+      </article>
+    </section>
   </div>
 </section>

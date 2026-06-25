@@ -1,69 +1,159 @@
-<section class="page home-page">
-    <section class="home-hero">
-  <h1>Trouvez votre prochain emploi dans l’informatique</h1>
-  <p>
-    Des milliers d’offres d’emploi, des entreprises innovantes,
-    des opportunités qui vous correspondent.
-  </p>
+<section class="home-page">
+  <section class="hero">
+    <div class="hero-content">
+      <p class="hero-badge">Emploi informatique</p>
 
-  <a routerLink="/jobs" class="btn">Rechercher une offre</a>
+      <h1>Trouvez une opportunité tech qui vous correspond</h1>
+
+      <p class="hero-text">
+        Jobiz rassemble des offres en développement web, réseau, systèmes et cybersécurité
+        pour aider les candidats à postuler plus simplement.
+      </p>
+
+      <div class="hero-search">
+        <div>
+          <span>Poste recherché</span>
+          <strong>Développeur, réseau, cybersécurité...</strong>
+        </div>
+
+        <div>
+          <span>Localisation</span>
+          <strong>Ville ou télétravail</strong>
+        </div>
+
+        <a routerLink="/jobs" class="btn">Rechercher</a>
+      </div>
+
+      <div class="hero-stats">
+        <div>
+          <strong>{{ jobs.length }}</strong>
+          <span>offres récentes</span>
+        </div>
+
+        <div>
+          <strong>4</strong>
+          <span>domaines tech</span>
+        </div>
+
+        <div>
+          <strong>PDF</strong>
+          <span>CV accepté</span>
+        </div>
+      </div>
+    </div>
   </section>
-  <section class="featured-section">
+
+  <section class="section featured-section">
     <div class="section-header">
-      <h1>Offres en vedette</h1>
-      <a routerLink="/jobs" class="btn btn-secondary">Voir toutes les offres</a>
+      <div>
+        <p class="section-kicker">Sélection</p>
+        <h2>Offres en vedette</h2>
+      </div>
+
+      <a routerLink="/jobs" class="section-link">Voir toutes les offres →</a>
     </div>
 
     <p *ngIf="isLoading">Chargement des offres...</p>
     <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
-    <p *ngIf="!isLoading && !errorMessage && jobs.length === 0">
-      Aucune offre disponible pour le moment.
-    </p>
 
     <div class="featured-grid" *ngIf="!isLoading && jobs.length > 0">
       <article class="job-card" *ngFor="let job of jobs">
-        <div class="job-image">
-          <span>Offre</span>
+        <div class="job-top">
+          <div class="job-logo">
+            {{ job.company?.name?.charAt(0) || 'J' }}
+          </div>
+
+          <span class="job-type">
+            {{ job.types?.[0]?.type?.name || 'Offre' }}
+          </span>
         </div>
 
-        <div class="job-content">
-          <h2>{{ job.title }}</h2>
-          <p>{{ job.company?.name }} - {{ job.city?.name }}</p>
-          <a [routerLink]="['/jobs', job.id]" class="btn">Détail</a>
-        </div>
+        <h3>{{ job.title }}</h3>
+
+        <p class="job-company">
+          {{ job.company?.name }} · {{ job.city?.name }}
+        </p>
+
+        <p class="job-description">
+          {{ job.description }}
+        </p>
+
+        <a [routerLink]="['/jobs', job.id]" class="btn btn-secondary">
+          Voir l’offre
+        </a>
       </article>
     </div>
   </section>
 
   <section class="section">
-    <h2>Catégories</h2>
+    <div class="section-header">
+      <div>
+        <p class="section-kicker">Domaines</p>
+        <h2>Explorer par catégorie</h2>
+      </div>
+    </div>
 
     <div class="category-grid">
-      <a routerLink="/jobs" class="category-card">Développement Web</a>
-      <a routerLink="/jobs" class="category-card">Administration Système</a>
-      <a routerLink="/jobs" class="category-card">Réseau</a>
-      <a routerLink="/jobs" class="category-card">Cybersécurité</a>
+      <a routerLink="/jobs" [queryParams]="{ category: 'Développement Web' }" class="category-card">
+        <span>Web</span>
+        <strong>Développement Web</strong>
+        <small>Interfaces, API, applications</small>
+      </a>
+
+      <a routerLink="/jobs" [queryParams]="{ category: 'Administration Système' }" class="category-card">
+        <span>Sys</span>
+        <strong>Administration Système</strong>
+        <small>Serveurs, support, maintenance</small>
+      </a>
+
+      <a routerLink="/jobs" [queryParams]="{ category: 'Réseau' }" class="category-card">
+        <span>Net</span>
+        <strong>Réseau</strong>
+        <small>Infrastructure et connectivité</small>
+      </a>
+
+      <a routerLink="/jobs" [queryParams]="{ category: 'Cybersécurité' }" class="category-card">
+        <span>Sec</span>
+        <strong>Cybersécurité</strong>
+        <small>Protection et surveillance</small>
+      </a>
     </div>
   </section>
 
-  <section class="section">
-    <h2>Entreprises récentes</h2>
+  <section class="section companies-section">
+    <div>
+      <p class="section-kicker">Recruteurs</p>
+      <h2>Des entreprises du numérique</h2>
+      <p>
+        Consultez des offres publiées par des entreprises spécialisées dans le web,
+        le cloud, les systèmes et la sécurité informatique.
+      </p>
+    </div>
 
     <div class="company-grid">
-      <div class="company-card">
-        <h3>TechNova</h3>
-        <p>Développement web</p>
-      </div>
+      <article class="company-card">
+        <div class="company-logo">T</div>
+        <div>
+          <h3>TechNova</h3>
+          <p>Développement web</p>
+        </div>
+      </article>
 
-      <div class="company-card">
-        <h3>CyberSafe</h3>
-        <p>Sécurité informatique</p>
-      </div>
+      <article class="company-card">
+        <div class="company-logo">C</div>
+        <div>
+          <h3>CyberSafe</h3>
+          <p>Sécurité informatique</p>
+        </div>
+      </article>
 
-      <div class="company-card">
-        <h3>CloudLink</h3>
-        <p>Cloud et réseau</p>
-      </div>
+      <article class="company-card">
+        <div class="company-logo">L</div>
+        <div>
+          <h3>CloudLink</h3>
+          <p>Cloud et réseau</p>
+        </div>
+      </article>
     </div>
   </section>
 </section>

@@ -1,37 +1,60 @@
-<section class="page auth-page">
-  <form class="card auth-form" (ngSubmit)="onSubmit()">
-    <h1>Inscription</h1>
+<section class="auth-page">
+  <div class="auth-card">
+    <aside class="auth-panel">
+      <p class="eyebrow">Créer un compte</p>
+      <h1>Rejoignez Jobiz et postulez plus facilement</h1>
+      <p>
+        Créez votre espace candidat pour déposer votre CV, envoyer vos candidatures
+        et suivre vos démarches depuis un seul endroit.
+      </p>
 
-    <label>
-      Prénom
-      <input type="text" name="firstName" [(ngModel)]="form.firstName" required>
-    </label>
+      <ul>
+        <li>Compte candidat gratuit</li>
+        <li>Candidatures centralisées</li>
+        <li>Données personnelles protégées</li>
+      </ul>
+    </aside>
 
-    <label>
-      Nom
-      <input type="text" name="lastName" [(ngModel)]="form.lastName" required>
-    </label>
+    <form class="auth-form" (ngSubmit)="onSubmit()">
+      <div class="form-heading">
+        <p class="eyebrow">Inscription</p>
+        <h2>Créer mon compte</h2>
+        <p>Complétez vos informations pour commencer.</p>
+      </div>
 
-    <label>
-      Email
-      <input type="email" name="email" [(ngModel)]="form.email" required>
-    </label>
+      <div class="form-row">
+        <label>
+          Prénom
+          <input type="text" name="firstName" [(ngModel)]="form.firstName" required>
+        </label>
 
-    <label>
-      Mot de passe
-      <input type="password" name="password" [(ngModel)]="form.password" required>
-    </label>
+        <label>
+          Nom
+          <input type="text" name="lastName" [(ngModel)]="form.lastName" required>
+        </label>
+      </div>
 
-    <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
-    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+      <label>
+        Email
+        <input type="email" name="email" [(ngModel)]="form.email" required>
+      </label>
 
-    <button class="btn" type="submit" [disabled]="isLoading">
-      {{ isLoading ? 'Création...' : 'Créer mon compte' }}
-    </button>
+      <label>
+        Mot de passe
+        <input type="password" name="password" [(ngModel)]="form.password" required>
+      </label>
 
-    <p>
-      Déjà un compte ?
-      <a routerLink="/login">Se connecter</a>
-    </p>
-  </form>
+      <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+      <button class="btn auth-submit" type="submit" [disabled]="isLoading">
+        {{ isLoading ? 'Création...' : 'Créer mon compte' }}
+      </button>
+
+      <p class="auth-switch">
+        Déjà un compte ?
+        <a routerLink="/login">Se connecter</a>
+      </p>
+    </form>
+  </div>
 </section>

@@ -1,3 +1,150 @@
+.account-page {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+.account-hero {
+  display: grid;
+  grid-template-columns: 76px 1fr;
+  gap: 1.2rem;
+  align-items: center;
+  padding: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 90% 20%, rgba(7, 87, 200, 0.14), transparent 260px),
+    linear-gradient(135deg, #ffffff 0%, #eef5ff 100%);
+  box-shadow: var(--shadow);
+
+  h1 {
+    margin-bottom: 0.5rem;
+  }
+
+  p {
+    margin: 0;
+    color: var(--muted);
+  }
+}
+
+.avatar {
+  display: grid;
+  place-items: center;
+  width: 76px;
+  height: 76px;
+  border-radius: 20px;
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 1.6rem;
+  font-weight: 900;
+}
+
+.eyebrow {
+  margin: 0 0 0.4rem;
+  color: var(--primary);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.account-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+
+.account-card {
+  display: grid;
+  gap: 1rem;
+  align-content: start;
+  min-height: 230px;
+  padding: 1.4rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: var(--shadow);
+
+  h2 {
+    margin: 0;
+  }
+
+  .btn {
+    margin-top: auto;
+  }
+}
+
+.info-list {
+  display: grid;
+  gap: 0.7rem;
+
+  p {
+    display: grid;
+    gap: 0.25rem;
+    margin: 0;
+  }
+
+  span {
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 800;
+  }
+}
+
+.cv-status {
+  display: grid;
+  grid-template-columns: 52px 1fr;
+  gap: 0.9rem;
+  align-items: center;
+  padding: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #f8fbff;
+
+  > span {
+    display: grid;
+    place-items: center;
+    width: 52px;
+    height: 52px;
+    border-radius: 14px;
+    background: var(--primary);
+    color: #ffffff;
+    font-weight: 900;
+  }
+
+  p {
+    margin: 0.25rem 0 0;
+    color: var(--muted);
+  }
+}
+
+.muted {
+  margin: 0;
+  color: var(--muted);
+}
+
+.admin-card {
+  border-color: rgba(7, 87, 200, 0.25);
+}
+
 .error {
-  color: #b42318;
+  color: var(--danger);
+}
+
+@media (max-width: 950px) {
+  .account-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 650px) {
+  .account-page {
+    width: min(100% - 1rem, 1120px);
+  }
+
+  .account-hero,
+  .account-grid {
+    grid-template-columns: 1fr;
+  }
 }

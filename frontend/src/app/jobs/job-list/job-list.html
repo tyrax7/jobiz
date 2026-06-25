@@ -1,59 +1,108 @@
-<section class="page">
-  <h1>Offres d’emploi</h1>
+<section class="jobs-page">
+  <header class="jobs-hero">
+    <p class="eyebrow">Recherche d’emploi</p>
+    <h1>Offres d’emploi informatique</h1>
+    <p>
+      Recherchez une offre par mot-clé, domaine, contrat ou ville.
+    </p>
+  </header>
 
-  <div class="filters card">
-    <input
-      type="text"
-      placeholder="Rechercher une offre"
-      [(ngModel)]="filters.search"
-    >
+  <section class="filters-card">
+    <div class="filter-field search-field">
+      <label for="search">Recherche</label>
+      <input
+        id="search"
+        type="text"
+        placeholder="Développeur, réseau, cybersécurité..."
+        [(ngModel)]="filters.search"
+      >
+    </div>
 
-    <select [(ngModel)]="filters.categoryId">
-      <option value="">Toutes les catégories</option>
-      <option *ngFor="let category of categories" [value]="category.id">
-        {{ category.name }}
-      </option>
-    </select>
+    <div class="filter-field">
+      <label for="category">Catégorie</label>
+      <select id="category" [(ngModel)]="filters.categoryId">
+        <option value="">Toutes les catégories</option>
+        <option *ngFor="let category of categories" [value]="category.id">
+          {{ category.name }}
+        </option>
+      </select>
+    </div>
 
-    <select [(ngModel)]="filters.typeId">
-      <option value="">Tous les contrats</option>
-      <option *ngFor="let type of jobTypes" [value]="type.id">
-        {{ type.name }}
-      </option>
-    </select>
+    <div class="filter-field">
+      <label for="type">Contrat</label>
+      <select id="type" [(ngModel)]="filters.typeId">
+        <option value="">Tous les contrats</option>
+        <option *ngFor="let type of jobTypes" [value]="type.id">
+          {{ type.name }}
+        </option>
+      </select>
+    </div>
 
-    <select [(ngModel)]="filters.cityId">
-      <option value="">Toutes les villes</option>
-      <option *ngFor="let city of cities" [value]="city.id">
-        {{ city.name }}
-      </option>
-    </select>
+    <div class="filter-field">
+      <label for="city">Ville</label>
+      <select id="city" [(ngModel)]="filters.cityId">
+        <option value="">Toutes les villes</option>
+        <option *ngFor="let city of cities" [value]="city.id">
+          {{ city.name }}
+        </option>
+      </select>
+    </div>
 
-    <button class="btn" type="button" (click)="loadJobs()">Filtrer</button>
-    <button class="btn btn-secondary" type="button" (click)="resetFilters()">Réinitialiser</button>
-  </div>
+    <div class="filter-actions">
+      <button class="btn" type="button" (click)="loadJobs()">Filtrer</button>
+      <button class="btn btn-secondary" type="button" (click)="resetFilters()">Réinitialiser</button>
+    </div>
+  </section>
 
-  <p *ngIf="isLoading">Chargement des offres...</p>
-  <p *ngIf="errorMessage">{{ errorMessage }}</p>
-  <p *ngIf="!isLoading && !errorMessage && jobs.length === 0">Aucune offre trouvée.</p>
+  <section class="results-header">
+    <div>
+      <h2>Résultats</h2>
+      <p *ngIf="!isLoading && !errorMessage">
+        {{ jobs.length }} offre(s) trouvée(s)
+      </p>
+    </div>
+  </section>
+
+  <p class="state-message" *ngIf="isLoading">Chargement des offres...</p>
+  <p class="error state-message" *ngIf="errorMessage">{{ errorMessage }}</p>
+  <p class="state-message" *ngIf="!isLoading && !errorMessage && jobs.length === 0">
+    Aucune offre trouvée.
+  </p>
 
   <div class="job-list" *ngIf="!isLoading && jobs.length > 0">
-    <article class="card" *ngFor="let job of jobs">
-      <h2>{{ job.title }}</h2>
-      <p>
-        {{ job.company?.name }} -
-        {{ job.city?.name || 'Ville non précisée' }}
-      </p>
+    <article class="job-item" *ngFor="let job of jobs">
+      <div class="job-logo">
+        {{ job.company?.name?.charAt(0) || 'J' }}
+      </div>
 
-      <p>
-        <span *ngFor="let relation of job.types">
-          {{ relation.type.name }}
-        </span>
-      </p>
+      <div class="job-main">
+        <div class="job-title-row">
+          <div>
+            <h2>{{ job.title }}</h2>
+            <p class="company">
+              {{ job.company?.name }} · {{ job.city?.name || 'Ville non précisée' }}
+            </p>
+          </div>
 
-      <p>{{ job.description }}</p>
+          <a [routerLink]="['/jobs', job.id]" class="btn btn-secondary">Détail</a>
+        </div>
 
-      <a [routerLink]="['/jobs', job.id]" class="btn btn-secondary">Détail</a>
+        <p class="description">{{ job.description }}</p>
+
+        <div class="tag-list">
+          <span *ngFor="let relation of job.categories">
+            {{ relation.category.name }}
+          </span>
+
+          <span *ngFor="let relation of job.types">
+            {{ relation.type.name }}
+          </span>
+
+          <span>
+            {{ job.remoteAllowed ? 'Télétravail' : 'Présentiel' }}
+          </span>
+        </div>
+      </div>
     </article>
   </div>
 </section>

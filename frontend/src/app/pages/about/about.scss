@@ -1,0 +1,134 @@
+.about-page {
+  width: min(1120px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+.about-hero {
+  display: grid;
+  align-items: center;
+  min-height: 310px;
+  padding: 3rem;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background:
+    radial-gradient(circle at 85% 20%, rgba(11, 94, 215, 0.16), transparent 260px),
+    linear-gradient(135deg, #ffffff 0%, #eef5ff 100%);
+  box-shadow: var(--shadow);
+
+  h1 {
+    max-width: 780px;
+    margin-bottom: 1rem;
+    font-size: clamp(2rem, 4vw, 3rem);
+  }
+
+  p {
+    max-width: 720px;
+    margin-bottom: 1.5rem;
+    color: var(--muted);
+    font-size: 1.05rem;
+  }
+}
+
+.eyebrow {
+  margin: 0 0 0.7rem;
+  color: var(--primary);
+  font-size: 0.8rem;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+  margin-top: 1.4rem;
+}
+
+.about-card,
+.about-section {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: #ffffff;
+  box-shadow: var(--shadow);
+}
+
+.about-card {
+  padding: 1.5rem;
+
+  h2 {
+    margin-bottom: 0.8rem;
+    font-size: 1.25rem;
+  }
+
+  p {
+    margin: 0;
+    color: var(--muted);
+  }
+}
+
+.card-icon {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 1rem;
+  border-radius: 50%;
+  background: var(--primary);
+  color: #ffffff;
+  font-weight: 800;
+}
+
+.about-section {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 2rem;
+  margin-top: 1.4rem;
+  padding: 2rem;
+
+  p {
+    color: var(--muted);
+  }
+}
+
+.check-list {
+  display: grid;
+  gap: 0.8rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  li {
+    padding: 0.85rem 1rem;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: #f8fbff;
+    font-weight: 600;
+  }
+
+  li::before {
+    content: "✓";
+    margin-right: 0.6rem;
+    color: var(--primary);
+    font-weight: 800;
+  }
+}
+
+@media (max-width: 850px) {
+  .about-grid,
+  .about-section {
+    grid-template-columns: 1fr;
+  }
+
+  .about-hero,
+  .about-section {
+    padding: 1.5rem;
+  }
+}

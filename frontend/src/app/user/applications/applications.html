@@ -1,37 +1,46 @@
-<section class="page">
-  <p>
-    <a routerLink="/account">Retour au compte</a>
-  </p>
+<section class="applications-page">
+  <a routerLink="/account" class="back-link">← Retour au compte</a>
 
-  <h1>Mes candidatures</h1>
+  <header class="applications-hero">
+    <p class="eyebrow">Suivi candidat</p>
+    <h1>Mes candidatures</h1>
+    <p>Consultez les offres auxquelles vous avez postulé et suivez leur statut.</p>
+  </header>
 
   <p *ngIf="isLoading">Chargement des candidatures...</p>
   <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
 
-  <p *ngIf="!isLoading && !errorMessage && applications.length === 0">
-    Vous n’avez pas encore postulé à une offre.
-  </p>
+  <section class="empty-state" *ngIf="!isLoading && !errorMessage && applications.length === 0">
+    <h2>Aucune candidature pour le moment</h2>
+    <p>Parcourez les offres disponibles et envoyez votre première candidature.</p>
+    <a routerLink="/jobs" class="btn">Voir les offres</a>
+  </section>
 
   <div class="application-list" *ngIf="applications.length > 0">
-    <article class="card" *ngFor="let application of applications">
-      <h2>{{ application.job.title }}</h2>
+    <article class="application-card" *ngFor="let application of applications">
+      <div class="job-logo">
+        {{ application.job.company?.name?.charAt(0) || 'J' }}
+      </div>
 
-      <p>
-        {{ application.job.company?.name }} -
-        {{ application.job.city?.name || 'Ville non précisée' }}
-      </p>
+      <div class="application-content">
+        <div class="application-header">
+          <div>
+            <h2>{{ application.job.title }}</h2>
+            <p>{{ application.job.company?.name }} · {{ application.job.city?.name || 'Ville non précisée' }}</p>
+          </div>
 
-      <p>
-        <strong>Statut :</strong> {{ application.status }}
-      </p>
+          <span class="status-badge">{{ application.status }}</span>
+        </div>
 
-      <p>
-        <strong>Date :</strong> {{ application.createdAt | date:'dd/MM/yyyy' }}
-      </p>
+        <div class="application-meta">
+          <span>Date de candidature</span>
+          <strong>{{ application.createdAt | date:'dd/MM/yyyy' }}</strong>
+        </div>
 
-      <a [routerLink]="['/jobs', application.job.id]" class="btn btn-secondary">
-        Voir l’offre
-      </a>
+        <a [routerLink]="['/jobs', application.job.id]" class="btn btn-secondary">
+          Voir l’offre
+        </a>
+      </div>
     </article>
   </div>
 </section>

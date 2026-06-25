@@ -1,26 +1,47 @@
-<section class="page auth-page">
-  <form class="card auth-form" (ngSubmit)="onSubmit()">
-    <h1>Connexion</h1>
+<section class="auth-page">
+  <div class="auth-card">
+    <aside class="auth-panel">
+      <p class="eyebrow">Bienvenue</p>
+      <h1>Connectez-vous à votre espace Jobiz</h1>
+      <p>
+        Retrouvez vos candidatures, mettez à jour votre profil et postulez aux offres
+        qui correspondent à votre parcours.
+      </p>
 
-    <label>
-      Email
-      <input type="email" name="email" [(ngModel)]="form.email" required>
-    </label>
+      <ul>
+        <li>Suivi de vos candidatures</li>
+        <li>Profil candidat sécurisé</li>
+        <li>CV disponible pour postuler</li>
+      </ul>
+    </aside>
 
-    <label>
-      Mot de passe
-      <input type="password" name="password" [(ngModel)]="form.password" required>
-    </label>
+    <form class="auth-form" (ngSubmit)="onSubmit()">
+      <div class="form-heading">
+        <p class="eyebrow">Connexion</p>
+        <h2>Accéder à mon compte</h2>
+        <p>Entrez vos identifiants pour continuer.</p>
+      </div>
 
-    <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+      <label>
+        Email
+        <input type="email" name="email" [(ngModel)]="form.email" required>
+      </label>
 
-    <button class="btn" type="submit" [disabled]="isLoading">
-      {{ isLoading ? 'Connexion...' : 'Se connecter' }}
-    </button>
+      <label>
+        Mot de passe
+        <input type="password" name="password" [(ngModel)]="form.password" required>
+      </label>
 
-    <p>
-      Pas encore de compte ?
-      <a routerLink="/register">Créer un compte</a>
-    </p>
-  </form>
+      <p class="error" *ngIf="errorMessage">{{ errorMessage }}</p>
+
+      <button class="btn auth-submit" type="submit" [disabled]="isLoading">
+        {{ isLoading ? 'Connexion...' : 'Se connecter' }}
+      </button>
+
+      <p class="auth-switch">
+        Pas encore de compte ?
+        <a routerLink="/register">Créer un compte</a>
+      </p>
+    </form>
+  </div>
 </section>

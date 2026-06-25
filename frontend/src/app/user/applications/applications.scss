@@ -1,8 +1,147 @@
+.applications-page {
+  width: min(980px, calc(100% - 2rem));
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  font-weight: 800;
+}
+
+.applications-hero {
+  padding: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background:
+    radial-gradient(circle at 90% 20%, rgba(7, 87, 200, 0.14), transparent 260px),
+    linear-gradient(135deg, #ffffff 0%, #eef5ff 100%);
+  box-shadow: var(--shadow);
+
+  h1 {
+    margin-bottom: 0.6rem;
+  }
+
+  p {
+    margin: 0;
+    color: var(--muted);
+  }
+}
+
+.eyebrow {
+  margin: 0 0 0.7rem;
+  color: var(--primary);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
 .application-list {
+  display: grid;
+  gap: 1rem;
+  margin-top: 1.2rem;
+}
+
+.application-card {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: 1.2rem;
+  padding: 1.4rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: var(--shadow);
+}
+
+.job-logo {
+  display: grid;
+  place-items: center;
+  width: 64px;
+  height: 64px;
+  border-radius: 16px;
+  background: var(--primary);
+  color: #ffffff;
+  font-size: 1.4rem;
+  font-weight: 900;
+}
+
+.application-content {
   display: grid;
   gap: 1rem;
 }
 
+.application-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+
+  h2,
+  p {
+    margin: 0;
+  }
+
+  p {
+    margin-top: 0.4rem;
+    color: var(--muted);
+  }
+}
+
+.status-badge {
+  height: fit-content;
+  padding: 0.45rem 0.7rem;
+  border-radius: 999px;
+  background: var(--primary-soft);
+  color: var(--primary);
+  font-weight: 900;
+}
+
+.application-meta {
+  display: grid;
+  gap: 0.2rem;
+
+  span {
+    color: var(--muted);
+    font-size: 0.85rem;
+    font-weight: 800;
+  }
+}
+
+.empty-state {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1.2rem;
+  padding: 2rem;
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  background: #ffffff;
+  box-shadow: var(--shadow);
+
+  h2,
+  p {
+    margin: 0;
+  }
+
+  p {
+    color: var(--muted);
+  }
+}
+
 .error {
-  color: #b42318;
+  color: var(--danger);
+}
+
+@media (max-width: 650px) {
+  .applications-page {
+    width: min(100% - 1rem, 980px);
+  }
+
+  .application-card {
+    grid-template-columns: 1fr;
+  }
+
+  .application-header {
+    flex-direction: column;
+  }
 }

@@ -1,50 +1,88 @@
-<section class="page">
-  <p *ngIf="isLoading">Chargement de l’offre...</p>
-  <p *ngIf="errorMessage">{{ errorMessage }}</p>
+<section class="job-detail-page">
+  <p class="state-message" *ngIf="isLoading">Chargement de l’offre...</p>
+  <p class="error state-message" *ngIf="errorMessage">{{ errorMessage }}</p>
 
-  <article class="card job-detail" *ngIf="job">
-    <p class="meta">
-      {{ job.company?.name }} -
-      {{ job.city?.name || 'Ville non précisée' }}
-    </p>
+  <article class="job-detail-card" *ngIf="job">
+    <header class="job-hero">
+      <div class="company-avatar">
+        {{ job.company?.name?.charAt(0) || 'J' }}
+      </div>
 
-    <h1>{{ job.title }}</h1>
+      <div class="job-heading">
+        <p class="meta">
+          {{ job.company?.name }} · {{ job.city?.name || 'Ville non précisée' }}
+        </p>
 
-    <p>{{ job.description }}</p>
+        <h1>{{ job.title }}</h1>
 
-    <ul>
-      <li>
-        Catégories :
-        <span *ngFor="let relation of job.categories">
-          {{ relation.category.name }}
-        </span>
-      </li>
+        <p class="description">
+          {{ job.description }}
+        </p>
 
-      <li>
-        Types de contrat :
-        <span *ngFor="let relation of job.types">
-          {{ relation.type.name }}
-        </span>
-      </li>
+        <div class="tag-list">
+          <span *ngFor="let relation of job.categories">
+            {{ relation.category.name }}
+          </span>
 
-      <li>
-        Télétravail :
-        {{ job.remoteAllowed ? 'oui' : 'non' }}
-      </li>
+          <span *ngFor="let relation of job.types">
+            {{ relation.type.name }}
+          </span>
 
-      <li *ngIf="job.salaryMin || job.salaryMax">
-        Salaire :
-        {{ job.salaryMin || 0 }} à {{ job.salaryMax || 0 }} euros
-      </li>
-    </ul>
+          <span>
+            {{ job.remoteAllowed ? 'Télétravail possible' : 'Présentiel' }}
+          </span>
+        </div>
+      </div>
+    </header>
 
-    <div class="application-box" *ngIf="!isLoggedIn">
-      <p>Connectez-vous pour postuler à cette offre.</p>
+    <section class="info-grid">
+      <div class="info-card">
+        <span>Entreprise</span>
+        <strong>{{ job.company?.name }}</strong>
+      </div>
+
+      <div class="info-card">
+        <span>Localisation</span>
+        <strong>{{ job.city?.name || 'Non précisée' }}</strong>
+      </div>
+
+      <div class="info-card">
+        <span>Contrat</span>
+        <strong>
+          <ng-container *ngFor="let relation of job.types; let last = last">
+            {{ relation.type.name }}<ng-container *ngIf="!last">, </ng-container>
+          </ng-container>
+        </strong>
+      </div>
+
+      <div class="info-card">
+        <span>Salaire</span>
+        <strong *ngIf="job.salaryMin || job.salaryMax">
+          {{ job.salaryMin || 0 }} à {{ job.salaryMax || 0 }} €
+        </strong>
+        <strong *ngIf="!job.salaryMin && !job.salaryMax">Non précisé</strong>
+      </div>
+    </section>
+
+    <section class="content-section">
+      <h2>Description du poste</h2>
+      <p>{{ job.description }}</p>
+    </section>
+
+    <section class="application-box" *ngIf="!isLoggedIn">
+      <div>
+        <h2>Vous souhaitez postuler ?</h2>
+        <p>Connectez-vous à votre espace candidat pour envoyer votre candidature.</p>
+      </div>
+
       <a routerLink="/login" class="btn">Se connecter</a>
-    </div>
+    </section>
 
     <form class="application-box" *ngIf="isLoggedIn" (ngSubmit)="apply()">
-      <h2>Postuler à cette offre</h2>
+      <div>
+        <h2>Postuler à cette offre</h2>
+        <p>Ajoutez une lettre de motivation courte et claire pour accompagner votre candidature.</p>
+      </div>
 
       <label>
         Lettre de motivation

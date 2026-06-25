@@ -25,15 +25,13 @@ model User {
 }
 
 model Company {
-  id          Int      @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   name        String
-  description String?  @db.Text
-  address     String?
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
+  description String?
+  address     String
 
-  cityId Int?
-  city   City? @relation(fields: [cityId], references: [id])
+  cityId Int
+  city   City @relation(fields: [cityId], references: [id])
 
   jobs Job[]
 
@@ -41,11 +39,9 @@ model Company {
 }
 
 model City {
-  id         Int      @id @default(autoincrement())
+  id         Int    @id @default(autoincrement())
   name       String
   postalCode String
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
 
   companies Company[]
   jobs      Job[]
@@ -56,7 +52,7 @@ model City {
 model Job {
   id            Int      @id @default(autoincrement())
   title         String
-  description   String   @db.Text
+  description   String
   remoteAllowed Boolean  @default(false)
   salaryMin     Int?
   salaryMax     Int?
@@ -64,25 +60,41 @@ model Job {
   updatedAt     DateTime @updatedAt
 
   companyId Int
-  company   Company @relation(fields: [companyId], references: [id])
+  cityId    Int
 
-  cityId Int?
-  city   City? @relation(fields: [cityId], references: [id])
+  company Company @relation(fields: [companyId], references: [id])
+  city    City    @relation(fields: [cityId], references: [id])
 
   applications Application[]
   categories   JobCategoryOnJob[]
   types        JobTypeOnJob[]
-  view         JobView?
-  dailyViews   JobDailyView[]
+
+  views      JobView?
+  dailyViews JobDailyView[]
 
   @@map("jobs")
 }
 
+model Application {
+  id          Int               @id @default(autoincrement())
+  coverLetter String
+  status      ApplicationStatus @default(PENDING)
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+
+  userId Int
+  jobId  Int
+
+  user User @relation(fields: [userId], references: [id])
+  job  Job  @relation(fields: [jobId], references: [id])
+
+  @@unique([userId, jobId])
+  @@map("applications")
+}
+
 model JobCategory {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id   Int    @id @default(autoincrement())
+  name String @unique
 
   jobs JobCategoryOnJob[]
 
@@ -90,44 +102,12 @@ model JobCategory {
 }
 
 model JobType {
-  id        Int      @id @default(autoincrement())
-  name      String   @unique
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  id   Int    @id @default(autoincrement())
+  name String @unique
 
   jobs JobTypeOnJob[]
 
   @@map("job_types")
-}
-
-model Application {
-  id          Int               @id @default(autoincrement())
-  coverLetter String            @db.Text
-  status      ApplicationStatus @default(PENDING)
-  createdAt   DateTime          @default(now())
-  updatedAt   DateTime          @updatedAt
-
-  userId Int
-  user   User @relation(fields: [userId], references: [id])
-
-  jobId Int
-  job   Job @relation(fields: [jobId], references: [id])
-
-  @@unique([userId, jobId])
-  @@map("applications")
-}
-
-model ContactRequest {
-  id          Int      @id @default(autoincrement())
-  firstName   String
-  lastName    String
-  email       String
-  subject     String
-  message     String   @db.Text
-  dataConsent Boolean  @default(false)
-  createdAt   DateTime @default(now())
-
-  @@map("contact_requests")
 }
 
 model JobCategoryOnJob {
@@ -151,13 +131,28 @@ model JobTypeOnJob {
   @@id([jobId, typeId])
   @@map("job_type_on_job")
 }
+
+model ContactRequest {
+  id          Int      @id @default(autoincrement())
+  firstName   String
+  lastName    String
+  email       String
+  subject     String
+  message     String
+  dataConsent Boolean
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@map("contact_requests")
+}
+
 model JobView {
   id        Int      @id @default(autoincrement())
   total     Int      @default(0)
   updatedAt DateTime @updatedAt
 
   jobId Int @unique
-  job   Job @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  job   Job @relation(fields: [jobId], references: [id])
 
   @@map("job_views")
 }
@@ -168,7 +163,7 @@ model JobDailyView {
   views Int      @default(0)
 
   jobId Int
-  job   Job @relation(fields: [jobId], references: [id], onDelete: Cascade)
+  job   Job @relation(fields: [jobId], references: [id])
 
   @@unique([jobId, day])
   @@map("job_daily_views")

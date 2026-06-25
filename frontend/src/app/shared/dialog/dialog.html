@@ -1,0 +1,18 @@
+<div class="dialog-backdrop" *ngIf="dialogService.dialog$ | async as dialog">
+  <div class="dialog-box" [class]="dialog.type">
+    <div class="dialog-icon">
+      <span *ngIf="dialog.type === 'success'">✓</span>
+      <span *ngIf="dialog.type === 'error'">!</span>
+      <span *ngIf="dialog.type === 'info'">i</span>
+    </div>
+
+    <div class="dialog-content">
+      <h2>{{ dialog.title }}</h2>
+      <p>{{ dialog.message }}</p>
+
+      <button class="btn" type="button" (click)="close()">
+        OK
+      </button>
+    </div>
+  </div>
+</div>
