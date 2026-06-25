@@ -2,7 +2,7 @@ import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { RouterLink } from '@angular/router';
-
+import { environment } from '../../../environments/environment';
 import { AuthService } from '../../auth/services/auth.service';
 import { User } from '../../auth/models/auth.model';
 import { UpdateProfileRequest, UserService } from '../services/user.service';
@@ -155,12 +155,16 @@ export class Profile implements OnInit {
   }
 
   getCvPreviewUrl(): string | null {
-    if (!this.user?.cvPath) {
-      return null;
-    }
-
-    const publicPath = this.user.cvPath.replace('src/uploads', 'uploads');
-
-    return `http://localhost:3000/${publicPath}`;
+  if (!this.user?.cvPath) {
+    return null;
   }
+
+  const apiBaseUrl = environment.apiUrl.replace(/\/api$/, '');
+  const publicPath = this.user.cvPath
+    .replace(/\\/g, '/')
+    .replace(/^.*src\/uploads/, 'uploads')
+    .replace(/^\/+/, '');
+
+  return `${apiBaseUrl}/${publicPath}`;
+}
 }

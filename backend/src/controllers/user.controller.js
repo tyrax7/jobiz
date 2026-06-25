@@ -47,7 +47,7 @@ async function uploadCv(req, res) {
       return res.status(400).json({ message: 'Aucun fichier reçu.' });
     }
 
-    const cvPath = req.file.path.replace(/\\/g, '/');
+    const cvPath = `uploads/cv/${req.file.filename}`;
 
     const updatedUser = await prisma.user.update({
       where: {
